@@ -90,6 +90,20 @@ class ManageTokensFragment : Fragment(), View.OnClickListener {
                 }
             }
             display_token.id -> {
+
+                Log.d(TAG, """
+                    tokens?.accessToken: ${sessionClient?.tokens?.accessToken}
+                    ------------
+                    tokens?.refreshToken: ${sessionClient?.tokens?.refreshToken} 
+                    ------------
+                    tokens?.idToken: ${sessionClient?.tokens?.idToken} 
+                    ------------
+                    tokens?.expiresIn: ${sessionClient?.tokens?.expiresIn} 
+                    """)
+
+                Log.d(TAG, "==========")
+                sessionClient?.tokens?.scope?.forEach { element ->   Log.d(TAG, "elem: $element")}
+
                 selectToken(resources.getStringArray(R.array.tokens)) {
                     when (it) {
                         0 -> info_view.text = sessionClient?.tokens?.accessToken

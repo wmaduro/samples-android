@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         hardwareKeystore = PreferenceManager.getDefaultSharedPreferences(baseContext).getBoolean(
             PREF_HARDWARE, false)
         customSignIn = PreferenceManager.getDefaultSharedPreferences(baseContext).getBoolean(
-            PREF_CUSTOM, false)
+            PREF_CUSTOM, true)
 
         createAuthClient()
         createWebClient()
@@ -230,6 +230,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     authClient.signIn(sessionToken, null, object :
                         RequestCallback<Result, AuthorizationException> {
                         override fun onSuccess(result: Result) {
+                            Log.d("TAG", """
+                                onSuccess: 
+                                result: ${result}
+                                status: ${result.status}
+                                loginHint: ${result.loginHint}
+                                status.name: ${result.status.name}
+                                """)
                             signInSuccess()
                         }
 
